@@ -319,33 +319,6 @@ ddcz-scoreboard/
     ├── css/style.css
     └── js/app.js
 ```
-
----
-
-## v5.0.0
-- Fixed job loading (correct GetQBPlayers iteration)
-- Activity groups with multi-job support
-- Per-group includeOffDuty
-- Fake players testing mode
-- Larger UI panel (420px)
-- Smart refresh system
-- 3D ID tags
-- Removed locales/*.lua error
-- JS-based localization
-- Full documentation
-
-## v4.0.0
-- Instant job update push
-- Fixed ID tag visibility (local only)
-
-## v3.0.0
-- Pagination support
-- Smart ping refresh
-
-## v2.0.0
-- Layout moved to top-right corner
-- Removed TAB shortcut
-
 ---
 
 # 💎 Features Summary
