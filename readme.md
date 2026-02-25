@@ -173,30 +173,6 @@ Config.ActivityGroups = {
 - Icons: https://fontawesome.com/icons (remove `fa-` prefix)
 
 ---
-
-# 🧪 Test Mode — Fake Players
-
-Used for UI testing without real players.
-
-```lua
-Config.FakePlayers = {
-    enabled = true,
-    count = 100,
-}
-```
-
-### Generated Data Includes:
-- Multiple job types
-- Realistic ping values
-- Activity counters
-- 1 admin, 1 mod, rest users
-
-⚠ Before production:
-
-```lua
-enabled = false
-```
-
 ---
 
 # 🆔 3D ID Tags
