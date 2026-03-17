@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" style="background:transparent">
+<head>
+    <meta charset="UTF-8">
+    <title>DDCZ Scoreboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="overlay" class="overlay hidden">
+    <div class="panel">
+
+        <!-- corner brackets -->
+        <span class="corner tl"></span>
+        <span class="corner tr"></span>
+        <span class="corner bl"></span>
+        <span class="corner br"></span>
+
+        <!-- HEADER -->
+        <div class="header">
+            <div class="header-brand">
+                <div class="brand-icon"><i class="fas fa-users"></i></div>
+                <div>
+                    <div class="brand-name" id="serverName">DDCZ ROLEPLAY</div>
+                    <div class="brand-tag"  id="serverTag">TACTICAL COMMAND</div>
+                </div>
+            </div>
+            <div class="header-counter">
+                <div class="counter-num">
+                    <span id="onlineCount">0</span>
+                    <span class="counter-sep">/</span>
+                    <span id="maxCount">64</span>
+                </div>
+                <div class="counter-lbl" id="lblOnline">ONLINE</div>
+            </div>
+            <div class="header-live">
+                <span class="live-dot"></span>
+                <span class="live-text">LIVE</span>
+            </div>
+        </div>
+
+        <!-- ACTIVITY GROUPS -->
+        <div class="activity" id="activity"></div>
+
+        <!-- TABLE HEADER -->
+        <div class="table-head">
+            <div class="th th-id"   id="lblId">ID</div>
+            <div class="th th-name" id="lblName">HRÁČ</div>
+            <div class="th th-job"  id="lblJob">PROFESE</div>
+            <div class="th th-ping" id="lblPing">PING</div>
+        </div>
+
+        <!-- PLAYER LIST -->
+        <div class="player-list" id="playerList">
+            <div class="empty-state" id="emptyState">
+                <i class="fas fa-satellite-dish"></i>
+                <span id="lblSearching">NAČÍTÁNÍ...</span>
+            </div>
+        </div>
+
+        <!-- PAGINATION -->
+        <div class="pagination hidden" id="pagination">
+            <button class="page-btn" id="btnPrev" title="Předchozí strana">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <div class="page-info">
+                <span id="pageCurrent">1</span>
+                <span class="page-sep">/</span>
+                <span id="pageTotal">1</span>
+            </div>
+            <button class="page-btn" id="btnNext" title="Další strana">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <div class="footer-keys">
+                <kbd>F10</kbd> scoreboard
+                &nbsp;&nbsp;
+                <kbd>←</kbd><kbd>→</kbd> stránky
+                &nbsp;&nbsp;
+                <kbd>↑</kbd> ID tagy
+            </div>
+            <div class="footer-brand">DDCZ</div>
+        </div>
+
+    </div>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,434 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap');
+
+/* ── Proměnné ── */
+:root {
+    --c-accent:  #00e5cc;
+    --c-accent2: #00b8ff;
+    --c-admin:   #c084fc;
+    --c-mod:     #60a5fa;
+    --c-good:    #00e5cc;
+    --c-mid:     #ffb020;
+    --c-bad:     #ff3b3b;
+    --c-bg:      #080f17;
+    --c-bg2:     #0b1820;
+    --c-bg3:     #0f2030;
+    --c-border:  rgba(0, 229, 204, 0.15);
+    --c-borderH: rgba(0, 229, 204, 0.40);
+    --c-text:    #dff0ec;
+    --c-dim:     rgba(200, 230, 225, 0.45);
+    --f-mono:    'Share Tech Mono', monospace;
+    --f-main:    'Rajdhani', sans-serif;
+    --panel-w:   420px;
+    --row-h:     42px;
+}
+
+/* ── Reset ── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { background: transparent !important; overflow: hidden; }
+body {
+    background: transparent !important;
+    background-color: transparent !important;
+    font-family: var(--f-main);
+    color: var(--c-text);
+    width: 0 !important; height: 0 !important;
+    min-width: 0 !important; min-height: 0 !important;
+}
+.hidden { display: none !important; }
+
+/* ── Overlay — pravý horní roh ── */
+.overlay {
+    position: fixed;
+    top: 18px;
+    right: 18px;
+    z-index: 9999;
+    animation: fadeSlide 0.2s ease both;
+}
+@keyframes fadeSlide {
+    from { opacity: 0; transform: translateX(14px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ── Panel ── */
+.panel {
+    position: relative;
+    width: var(--panel-w);
+    max-height: calc(100vh - 36px);
+    display: flex;
+    flex-direction: column;
+    background: rgba(8, 15, 23, 0.96);
+    border: 1px solid var(--c-border);
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow:
+        0 0 80px rgba(0, 229, 204, 0.05),
+        0 20px 60px rgba(0, 0, 0, 0.8);
+    animation: panelIn 0.22s cubic-bezier(0.22, 0.68, 0, 1.1) both;
+}
+@keyframes panelIn {
+    from { transform: translateX(14px) scale(0.97); opacity: 0; }
+    to   { transform: translateX(0) scale(1); opacity: 1; }
+}
+
+/* rohové ozdoby */
+.corner {
+    position: absolute;
+    width: 10px; height: 10px;
+    border-color: var(--c-accent);
+    border-style: solid;
+    opacity: 0.4;
+    z-index: 10;
+}
+.corner.tl { top: 0;    left: 0;  border-width: 1px 0 0 1px; }
+.corner.tr { top: 0;    right: 0; border-width: 1px 1px 0 0; }
+.corner.bl { bottom: 0; left: 0;  border-width: 0 0 1px 1px; }
+.corner.br { bottom: 0; right: 0; border-width: 0 1px 1px 0; }
+
+/* ── Header ── */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 13px 18px;
+    background: linear-gradient(90deg, var(--c-bg2) 0%, var(--c-bg3) 100%);
+    border-bottom: 1px solid var(--c-border);
+    flex-shrink: 0;
+}
+
+.header-brand { display: flex; align-items: center; gap: 11px; }
+
+.brand-icon {
+    width: 36px; height: 36px;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(0, 229, 204, 0.07);
+    border: 1px solid var(--c-borderH);
+    border-radius: 5px;
+    color: var(--c-accent);
+    font-size: 15px;
+    flex-shrink: 0;
+}
+
+.brand-name {
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 2.5px;
+    color: var(--c-text);
+    line-height: 1;
+}
+.brand-tag {
+    font-family: var(--f-mono);
+    font-size: 9px;
+    color: var(--c-dim);
+    letter-spacing: 1px;
+    margin-top: 3px;
+}
+
+.header-counter { text-align: center; }
+.counter-num {
+    font-family: var(--f-mono);
+    font-size: 22px;
+    color: var(--c-accent);
+    letter-spacing: 2px;
+    line-height: 1;
+}
+.counter-sep { opacity: 0.3; margin: 0 3px; }
+.counter-lbl {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    color: var(--c-dim);
+    margin-top: 3px;
+}
+
+.header-live { display: flex; align-items: center; gap: 7px; }
+
+.live-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--c-accent);
+    animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(0, 229, 204, 0.6); }
+    50%       { box-shadow: 0 0 0 5px rgba(0, 229, 204, 0); }
+}
+.live-text {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    color: var(--c-accent);
+    letter-spacing: 2px;
+}
+
+/* ── Activity bar (skupiny) ── */
+.activity {
+    display: flex;
+    align-items: stretch;
+    background: rgba(0, 229, 204, 0.02);
+    border-bottom: 1px solid var(--c-border);
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.act-group {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-right: 1px solid var(--c-border);
+    transition: background 0.2s;
+    cursor: default;
+}
+.act-group:last-child { border-right: none; }
+.act-group:hover { background: rgba(0, 229, 204, 0.04); }
+
+.act-icon { font-size: 15px; opacity: 0.8; flex-shrink: 0; }
+
+.act-body { display: flex; flex-direction: column; gap: 2px; }
+
+.act-count {
+    font-family: var(--f-mono);
+    font-size: 17px;
+    line-height: 1;
+    color: var(--c-text);
+}
+
+.act-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: var(--c-dim);
+    text-transform: uppercase;
+}
+
+/* ── Table header ── */
+.table-head {
+    display: flex;
+    align-items: center;
+    height: 32px;
+    padding: 0 16px;
+    background: rgba(0, 229, 204, 0.025);
+    border-bottom: 1px solid var(--c-border);
+    flex-shrink: 0;
+}
+
+.th {
+    font-family: var(--f-mono);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--c-dim);
+    text-transform: uppercase;
+}
+.th-id   { width: 44px; flex-shrink: 0; }
+.th-name { flex: 1; }
+.th-job  { width: 110px; flex-shrink: 0; }
+.th-ping { width: 52px; flex-shrink: 0; text-align: right; }
+
+/* ── Player list ── */
+.player-list {
+    flex: 1;
+    overflow-y: scroll;
+    padding: 4px 0;
+    min-height: 0;
+    overscroll-behavior: contain;
+}
+.player-list::-webkit-scrollbar { width: 4px; }
+.player-list::-webkit-scrollbar-track { background: transparent; }
+.player-list::-webkit-scrollbar-thumb { background: rgba(0, 229, 204, 0.2); border-radius: 2px; }
+.player-list::-webkit-scrollbar-thumb:hover { background: rgba(0, 229, 204, 0.4); }
+
+/* prázdný stav */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 50px 20px;
+    color: var(--c-dim);
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+}
+.empty-state i { font-size: 30px; opacity: 0.18; }
+
+/* ── Řádek hráče ── */
+.player-row {
+    display: flex;
+    align-items: center;
+    height: var(--row-h);
+    padding: 0 16px;
+    border-bottom: 1px solid rgba(0, 229, 204, 0.04);
+    position: relative;
+    cursor: default;
+    transition: background 0.12s;
+}
+.player-row:last-child { border-bottom: none; }
+.player-row:hover { background: rgba(0, 229, 204, 0.04); }
+
+/* barevný pruh vlevo pro adminy / mody */
+.player-row::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 8px; bottom: 8px;
+    width: 2px;
+    border-radius: 0 1px 1px 0;
+    opacity: 0;
+}
+.player-row.perm-admin::before { background: var(--c-admin); opacity: 1; }
+.player-row.perm-mod::before   { background: var(--c-mod);   opacity: 1; }
+
+/* vstupní animace — přidá se jen při prvním renderu */
+.player-row.enter {
+    animation: rowEnter 0.16s ease both;
+}
+@keyframes rowEnter {
+    from { opacity: 0; transform: translateX(-6px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+/* buňky */
+.col-id {
+    width: 44px;
+    flex-shrink: 0;
+    font-family: var(--f-mono);
+    font-size: 12px;
+    color: var(--c-dim);
+}
+
+.col-name {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+}
+.col-name-text {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--c-text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* badge admin / mod */
+.badge {
+    font-family: var(--f-mono);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 1px 5px;
+    border-radius: 2px;
+    flex-shrink: 0;
+    text-transform: uppercase;
+}
+.badge-admin { color: var(--c-admin); background: rgba(192,132,252,0.1); border: 1px solid rgba(192,132,252,0.25); }
+.badge-mod   { color: var(--c-mod);   background: rgba(96,165,250,0.1);  border: 1px solid rgba(96,165,250,0.25);  }
+
+.col-job {
+    width: 110px;
+    flex-shrink: 0;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--c-dim);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 8px;
+}
+.col-job.on-duty { color: var(--c-accent); }
+
+.col-ping {
+    width: 52px;
+    flex-shrink: 0;
+    font-family: var(--f-mono);
+    font-size: 12px;
+    text-align: right;
+}
+.ping-dot {
+    display: inline-block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    margin-right: 4px;
+    vertical-align: middle;
+}
+.ping-good { color: var(--c-good); } .ping-good .ping-dot { background: var(--c-good); }
+.ping-mid  { color: var(--c-mid);  } .ping-mid  .ping-dot { background: var(--c-mid);  }
+.ping-bad  { color: var(--c-bad);  } .ping-bad  .ping-dot { background: var(--c-bad);  }
+
+/* ── Stránkování ── */
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 8px 18px;
+    border-top: 1px solid var(--c-border);
+    flex-shrink: 0;
+    background: rgba(0, 229, 204, 0.015);
+}
+
+.page-btn {
+    width: 28px; height: 28px;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(0, 229, 204, 0.06);
+    border: 1px solid var(--c-border);
+    border-radius: 4px;
+    color: var(--c-dim);
+    font-size: 11px;
+    cursor: pointer;
+    transition: 0.15s;
+}
+.page-btn:hover:not(:disabled) {
+    background: rgba(0, 229, 204, 0.14);
+    border-color: var(--c-accent);
+    color: var(--c-accent);
+}
+.page-btn:disabled { opacity: 0.2; cursor: default; }
+
+.page-info {
+    font-family: var(--f-mono);
+    font-size: 12px;
+    color: var(--c-text);
+    min-width: 54px;
+    text-align: center;
+}
+.page-sep { color: var(--c-dim); margin: 0 4px; }
+
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7px 18px;
+    background: var(--c-bg2);
+    border-top: 1px solid var(--c-border);
+    flex-shrink: 0;
+    gap: 8px;
+}
+
+.footer-keys {
+    font-family: var(--f-mono);
+    font-size: 9px;
+    color: var(--c-dim);
+    letter-spacing: 0.4px;
+    flex: 1;
+}
+.footer-keys kbd {
+    display: inline-block;
+    background: rgba(0, 229, 204, 0.07);
+    border: 1px solid var(--c-border);
+    border-radius: 3px;
+    padding: 1px 6px;
+    font-family: var(--f-mono);
+    font-size: 9px;
+    color: var(--c-accent);
+    margin-right: 2px;
+}
+
+.footer-brand {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: rgba(0, 229, 204, 0.2);
+}
